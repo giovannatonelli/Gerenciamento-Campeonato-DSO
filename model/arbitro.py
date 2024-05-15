@@ -1,5 +1,4 @@
-from pessoa import Pessoa
-
+from pessoa import Pessoa, model
 
 class Arbitro(Pessoa):
     def __init__(self, nome: str, cpf: str, data_nascimento, num_partidas: int):
