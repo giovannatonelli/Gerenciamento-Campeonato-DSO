@@ -1,4 +1,3 @@
-from pessoa import Pessoa
 from aluno import Aluno
 from tela_aluno import TelaAluno
 
@@ -20,8 +19,8 @@ class ControladorAluno():
             for aluno in self.__alunos:
                 if novo_aluno.matricula == aluno.matricula:
                     return None
-                self.__alunos.append(novo_aluno)
-                return novo_aluno
+            self.__alunos.append(novo_aluno)
+            return novo_aluno
 
     def listar_alunos(self):
         for aluno in self.__alunos:
@@ -30,7 +29,7 @@ class ControladorAluno():
             self.__tela_aluno.mostrar_mensagem("A lista está vazia")
 
     def altera_aluno(self):
-        self.lista_alunos()
+        self.listar_alunos()
         matricula_aluno = self.__tela_aluno.seleciona_aluno()
         aluno = self.pega_aluno_por_matricula(matricula_aluno)
 
@@ -40,15 +39,17 @@ class ControladorAluno():
             aluno.cpf = novos_dados_aluno["cpf"]
             aluno.data_nascimento = novos_dados_aluno["data_nascimento"]
             aluno.matricula =  novos_dados_aluno["matricula"]
+            self.__tela_aluno.mostrar_mensagem("Dados Alterados com sucesso")
+            self.__tela_aluno.mostra_dados_aluno()
 
     def exclui_aluno(self):
-        self.__listar_alunos()
-        matricula_aluno = self.__tela_aluno.escolhe_amigo()
+        self.listar_alunos()
+        matricula_aluno = self.__tela_aluno.seleciona_aluno()
         aluno = self.pega_aluno_por_matricula(matricula_aluno)
 
         if(aluno is not None):
             self.__alunos.remove(aluno)
-            self.__tela.aluno.mostrar_mensagem("Aluno removido com sucesso")
+            self.__tela_aluno.mostrar_mensagem("Aluno removido com sucesso")
             #avaliar possibilidade de colocar uma opcao "deseja listar os alunos?"
             self.listar_alunos()
         else:

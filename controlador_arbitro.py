@@ -17,33 +17,33 @@ class ControladorArbitro():
         novo_arbitro = Arbitro (dados_arbitro["nome"], dados_arbitro["cpf"], dados_arbitro["data_nascimento"], dados_arbitro["num_partidas"])
         if isinstance(novo_arbitro, Arbitro):
             for arbitro in self.__arbitros:
-                if novo_arbitro.matricula == arbitro.matricula:
+                if novo_arbitro.cpf == arbitro.cpf:
                     return None
-                self.__arbitros.append(novo_arbitro)
-                return novo_arbitro
+            self.__arbitros.append(novo_arbitro)
+            return novo_arbitro
 
     def listar_arbitros(self):
         for arbitro in self.__arbitros:
-            self.__tela_arbitro.mostra_dados_arbitro({"nome": arbitro.nome, "cpf": arbitro.cpf, "data_nascimento": arbitro.data_nascimento, "matricula": arbitro.matricula})
+            self.__tela_arbitro.mostra_dados_arbitro({"nome": arbitro.nome, "cpf": arbitro.cpf, "data_nascimento": arbitro.data_nascimento, "num_partidas": arbitro.num_partidas})
         if len(self.__arbitros) == 0:
             self.__tela_arbitro.mostrar_mensagem("A lista está vazia")
 
     def altera_arbitro(self):
         self.lista_arbitros()
-        matricula_arbitro = self.__tela_arbitro.seleciona_arbitro()
-        arbitro = self.pega_arbitro_por_matricula(matricula_arbitro)
+        cpf_arbitro = self.__tela_arbitro.seleciona_arbitro()
+        arbitro = self.pega_arbitro_por_cpf(cpf_arbitro)
 
         if(arbitro is not None):
             novos_dados_arbitro = self.__tela_arbitro.solicita_dados_arbitro()
             arbitro.nome = novos_dados_arbitro["nome"]
             arbitro.cpf = novos_dados_arbitro["cpf"]
             arbitro.data_nascimento = novos_dados_arbitro["data_nascimento"]
-            arbitro.matricula =  novos_dados_arbitro["matricula"]
+            arbitro.cpf =  novos_dados_arbitro["cpf"]
 
     def exclui_arbitro(self):
         self.__listar_arbitros()
-        matricula_arbitro = self.__tela_arbitro.escolhe_amigo()
-        arbitro = self.pega_arbitro_por_matricula(matricula_arbitro)
+        cpf_arbitro = self.__tela_arbitro.escolhe_arbitro()
+        arbitro = self.pega_arbitro_por_cpf(cpf_arbitro)
 
         if(arbitro is not None):
             self.__arbitros.remove(arbitro)
