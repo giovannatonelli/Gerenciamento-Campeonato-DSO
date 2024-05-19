@@ -1,11 +1,11 @@
 from arbitro import Arbitro
 from tela_arbitro import TelaArbitro
 
-
 class ControladorArbitro():
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__arbitros = []
         self.__tela_arbitro = TelaArbitro()
+        self.__controlador_sistema = controlador_sistema
 
     def pega_arbitro_por_cpf(self, cpf: str):
         for arbitro in self.__arbitros:
@@ -52,6 +52,8 @@ class ControladorArbitro():
             self.listar_arbitros()
         else:
             self.__tela_arbitro.mostrar_mensagem("Esse arbitro não existe")
+
+    #def adicionar_num_partidas(self):
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()

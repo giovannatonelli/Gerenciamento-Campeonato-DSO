@@ -65,6 +65,6 @@ class Partida():
         return self.__arbitro
 
     @arbitro.setter
-    if isinstance(arbitro, Arbitro):
-        def arbitro(self, arbitro):
+    def arbitro(self, arbitro):
+        if isinstance(arbitro, Arbitro):
             self.__arbitro = arbitro

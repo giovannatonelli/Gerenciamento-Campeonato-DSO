@@ -3,9 +3,10 @@ from tela_aluno import TelaAluno
 
 
 class ControladorAluno():
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__alunos = []
         self.__tela_aluno = TelaAluno()
+        self.__controlador_sistema = controlador_sistema
 
     def pega_aluno_por_matricula(self, matricula: str):
         for aluno in self.__alunos:
@@ -26,7 +27,7 @@ class ControladorAluno():
         for aluno in self.__alunos:
             self.__tela_aluno.mostra_dados_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "data_nascimento": aluno.data_nascimento, "matricula": aluno.matricula})
         if len(self.__alunos) == 0:
-            self.__tela_aluno.mostrar_mensagem("A lista está vazia")
+            self.__tela_aluno.mostrar_mensagem("A lista de alunos está vazia")
 
     def altera_aluno(self):
         self.listar_alunos()

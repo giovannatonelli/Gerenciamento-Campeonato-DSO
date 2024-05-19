@@ -5,12 +5,12 @@ from controlador_curso import ControladorCurso
 from controlador_equipe import ControladorEquipe
 from controlador_partida import ControladorPartida
 from controlador_campeonato import ControladorCampeonato
-#ADD demais controladores
+
 
 class ControladorSistema:
     def __init__(self):
-        self.__controlador_aluno = ControladorAluno()
-        self.__controlador_arbitro = ControladorArbitro()
+        self.__controlador_aluno = ControladorAluno(self)
+        self.__controlador_arbitro = ControladorArbitro(self)
         self.__controlador_curso = ControladorCurso()
         self.__controlador_equipe = ControladorEquipe()
         self.__controlador_partida = ControladorPartida()

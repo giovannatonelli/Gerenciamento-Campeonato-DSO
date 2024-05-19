@@ -11,7 +11,7 @@ class TelaArbitro():
         print("4: Alterar dados do árbitro")
         print("5: Voltar para o menu incial")
         print()
-        opcao_escolhida = int(input("Digite a opção desejada:"))
+        opcao_escolhida = int(input("Digite a opção desejada: "))
         return opcao_escolhida
 
     def solicita_dados_arbitro(self):
