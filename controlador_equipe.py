@@ -79,7 +79,7 @@ class ControladorEquipe:
                 self.adicionar_aluno_equipe()
             elif opcao == 6:
                 self.remover_aluno_equipe()
-            elif opcao == 7:
+            elif opcao == 0:
                 return
             else:
                 print("Opção inválida!")

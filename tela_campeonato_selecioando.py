@@ -18,6 +18,7 @@ class TelaCampeonatoSelecionado:
         return input("Escolha equipe para fazer parte do campeonato: ")
 
     def mostra_equipes(self, campeonato):
+        print()
         print("Equipes:")
         for equipe in campeonato.equipes:
             print(f"  - {equipe.nome}")
@@ -28,7 +29,9 @@ class TelaCampeonatoSelecionado:
     def mostra_partidas(self, campeonato):
         print("Partidas:")
         for partida in campeonato.partidas:
-            print(f"  - {partida.equipe_1.nome}     x   {partida.equipe_2.nome}     - {partida.data_partida}")
+            print(f"  - {partida.equipe_1.nome}     x   {partida.equipe_2.nome}     - {partida.data_partida} - {partida.arbitro.nome}")
+
+        print()
             
     def mostra_resultado_partida(self, partida):
         print(f"  - {partida.equipe_1.nome} {partida.num_gols_eq1}    x   {partida.num_gols_eq2} {partida.equipe_2.nome}  - {partida.data_partida}")

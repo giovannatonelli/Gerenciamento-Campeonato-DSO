@@ -10,7 +10,7 @@ class TelaEquipe:
         print("4: Alterar dados da equipe")
         print("5: Adicionar aluno à equipe")
         print("6: Remover aluno da equipe")
-        print("7: Voltar para o menu inicial")
+        print("0: Voltar para o menu inicial")
         print()
         return int(input("Digite a opção desejada: "))
 

@@ -9,8 +9,7 @@ class TelaSistema():
         print("2: Árbitros")
         print("3: Cursos") 
         print("4: Equipes")
-        print("5: Partida")
-        print("6: Campeonato")
+        print("5: Campeonato")
         print("0: Finalizar sistema")
         opcao = int(input("Escolha a opcão: "))
         return opcao

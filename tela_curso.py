@@ -8,7 +8,7 @@ class TelaCurso:
         print("2: Adicionar curso")
         print("3: Excluir curso")
         print("4: Alterar dados do curso")
-        print("5: Voltar para o menu inicial")
+        print("0: Voltar para o menu inicial")
         print()
         return int(input("Digite a opção desejada: "))
 

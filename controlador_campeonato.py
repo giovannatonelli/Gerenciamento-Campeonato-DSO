@@ -24,13 +24,15 @@ class ControladorCampeonato:
 
     def seleciona_campeonato(self):
         nome = self.__tela_campeonato.solicita_nome_campeonato()
+        if len(self.__campeonatos) == 0:
+                    self.__tela_campeonato_selecionado.mostrar_mensagem("Não existem campeonatos cadastrados")
         for campeonato in self.__campeonatos:
             if campeonato.nome_campeonato == nome:
                 self.__campeonato = campeonato
                 self.mostra_dados_do_campeonato()
                 self.abre_tela_campeonato_selecionado()
             else:
-                self.__tela_campeonato.mostrar_mensagem("Campeonato não existe")
+                self.__tela_campeonato_selecionado.mostrar_mensagem("Campeonato não existe")
 
     def gera_partidas(self):
         if self.valida_quantidade_equipes():
@@ -43,6 +45,7 @@ class ControladorCampeonato:
                 data = self.gera_data_aleatoria()
                 partida = Partida(equipe1, equipe2, arbitro, data)
                 self.__campeonato.adc_partida(partida)
+                arbitro.adc_num_partidas()
             self.__campeonato.gera_tabela_pontuacao()
             self.__tela_campeonato_selecionado.mostrar_mensagem("Partidas geradas com sucesso")
         else:
@@ -133,21 +136,6 @@ class ControladorCampeonato:
             opcao_escolhida = self.__tela_campeonato_selecionado.tela_opcoes_campeonato_selecionado(self.__campeonato)
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
-
-    def inclui_ganhador_campeonato(self):
-        nome_campeonato = self.__tela_campeonato.solicita_nome_campeonato()
-        campeonato = self.pega_campeonato_por_nome(nome_campeonato)
-        if campeonato:
-            nome_equipe_ganhadora = input("Digite o nome da equipe ganhadora: ")
-            equipe_ganhadora = self.pega_equipe_por_nome(nome_equipe_ganhadora)
-            if equipe_ganhadora:
-                campeonato.set_ganhador(equipe_ganhadora)  #método set_ganhador em Campeonato
-                self.__tela_campeonato.mostrar_mensagem("Ganhador do campeonato definido com sucesso!")
-            else:
-                print("Equipe não encontrada!")
-        else:
-            print("Campeonato não encontrado!")
-
 
 
     def retornar_incio(self):

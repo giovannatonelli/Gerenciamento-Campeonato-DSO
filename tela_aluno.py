@@ -17,17 +17,36 @@ class TelaAluno():
     def solicita_dados_aluno(self):
         print()
         print("Insira aqui os dados do aluno:")
-        nome = input("Nome: ")
-        cpf = input("CPF: ")
-        data_nascimento = input("Data de nascimento: ")
-        matricula = input("Matrícula: ")
-        curso = input("Curso: ")
+        while True:
+            try:
+                nome = input("Nome: ").strip()
+                # if not nome:
+                #     raise ValueError("Nome inválido. Por favor, insira um nome válido.")
+                
+                cpf = input("CPF: ").strip()
+                # if not cpf.isdigit() or len(cpf) != 11:
+                #     raise ValueError("CPF inválido. Por favor, insira um CPF válido contendo apenas dígitos.")
+                
+                data_nascimento = input("Data de nascimento(ddmmyy): ").strip()
+                # if not len(data_nascimento) != 8:
+                #     raise ValueError("Verifique se está digitando a data de nascimento no formato ddmmyy")
+
+                matricula = input("Matrícula: ").strip()
+                # if not matricula:
+                #     raise ValueError("Matrícula inválida. Por favor, insira uma matrícula válida.")
+
+                curso = input("Nome do curso: ").strip()
+            
+                # Se todas as entradas forem válidas, saímos do loop
+                break
+            
+            except ValueError as e:
+                print("Erro:", e)
 
         return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento, "matricula": matricula, "curso": curso}
 
     def mostra_dados_aluno(self, dados_aluno):
         print()
-        print("Aqui está a lista de alunos")
         print("NOME: ", dados_aluno["nome"])
         print("CPF: ", dados_aluno["cpf"])
         print("DATA DE NASCIMENTO: ", dados_aluno["data_nascimento"])

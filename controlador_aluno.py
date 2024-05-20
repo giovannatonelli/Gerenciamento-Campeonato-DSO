@@ -19,11 +19,14 @@ class ControladorAluno():
         if isinstance(novo_aluno, Aluno):
             for aluno in self.__alunos:
                 if novo_aluno.matricula == aluno.matricula:
+                    self.__tela_aluno.mostrar_mensagem("Não foi possível completar a ação pois o aluno já está cadastrado")
                     return None
             self.__alunos.append(novo_aluno)
+            self.__tela_aluno.mostrar_mensagem("Aluno adicionado com sucesso!")
             return novo_aluno
 
     def listar_alunos(self):
+        self.__tela_aluno.mostrar_mensagem("Aqui está a lista de alunos")
         for aluno in self.__alunos:
             self.__tela_aluno.mostra_dados_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "data_nascimento": aluno.data_nascimento, "matricula": aluno.matricula, "curso": aluno.curso})
         if len(self.__alunos) == 0:

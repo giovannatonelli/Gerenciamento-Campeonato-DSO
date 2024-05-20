@@ -2,7 +2,6 @@ class Curso:
     def __init__(self, codigo_curso, nome_curso):
         self.codigo_curso = codigo_curso
         self.nome_curso = nome_curso
-        self.equipe = None  # Referência para a equipe associada ao curso
 
     def codigo_curso(self):
         return self.codigo_curso
@@ -15,9 +14,3 @@ class Curso:
 
     def nome_curso(self, nome_curso):
         self.nome_curso = nome_curso
-
-    def equipe(self):
-        return self.equipe
-
-    def equipe(self, equipe):
-        self.equipe = equipe

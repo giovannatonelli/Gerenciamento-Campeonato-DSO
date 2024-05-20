@@ -10,6 +10,5 @@ class Arbitro(Pessoa):
     def num_partidas(self):
         return self.__num_partidas
 
-    @num_partidas.setter
-    def num_partidas(self, num_partidas):
-        self.__num_partidas += num_partidas
+    def adc_num_partidas(self):
+        self.__num_partidas += 1

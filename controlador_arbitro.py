@@ -19,11 +19,14 @@ class ControladorArbitro():
         if isinstance(novo_arbitro, Arbitro):
             for arbitro in self.__arbitros:
                 if novo_arbitro.cpf == arbitro.cpf:
+                    self.__tela_arbitro.mostrar_mensagem("Não foi possível completar a ação pois o árbitro já está cadastrado")
                     return None
             self.__arbitros.append(novo_arbitro)
+            self.__tela_arbitro.mostrar_mensagem("Árbitro adicionado com sucesso")
             return novo_arbitro
 
     def listar_arbitros(self):
+        self.__tela_arbitro.mostrar_mensagem("Aqui está a lista de árbitros")
         for arbitro in self.__arbitros:
             self.__tela_arbitro.mostra_dados_arbitro({"nome": arbitro.nome, "cpf": arbitro.cpf, "data_nascimento": arbitro.data_nascimento, "num_partidas": arbitro.num_partidas})
         if len(self.__arbitros) == 0:
@@ -62,7 +65,7 @@ class ControladorArbitro():
         self.__controlador_sistema.abre_tela()
 
     def abre_tela_arbitro(self):
-        lista_opcoes = {1: self.listar_arbitros, 2: self.inclui_arbitro, 3: self.exclui_arbitro, 4: self.altera_arbitro, 5: self.retornar_incio}
+        lista_opcoes = {1: self.listar_arbitros, 2: self.inclui_arbitro, 3: self.exclui_arbitro, 4: self.altera_arbitro, 0: self.retornar_incio}
 
         executando = True 
         while executando:

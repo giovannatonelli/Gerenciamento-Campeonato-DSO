@@ -15,11 +15,10 @@ class ControladorSistema:
         self.__controlador_partida = ControladorPartida(self)
         self.__controlador_campeonato = ControladorCampeonato(self)
         self.__tela_sistema = TelaSistema()
-    
-#######################################################
+
     def inicializa_sistema(self):
         self.abre_tela()
-#######################################################
+
     @property
     def controlador_aluno(self):
         return self.__controlador_aluno
@@ -43,7 +42,6 @@ class ControladorSistema:
     @property
     def controlador_partida(self):
         return self.__controlador_partida
-#################################################
 
     def controla_arbitos(self):
         # Chama o controlador de Arbitros
@@ -77,13 +75,12 @@ class ControladorSistema:
     def pega_aluno_por_matricula(self, matricula_aluno):
         return self.__controlador_aluno.pega_aluno_por_matricula(matricula_aluno)
 
-##################################################################
     def encerra_sistema(self):
         exit(0)
 
     def abre_tela(self):
         lista_opcoes = {1: self.controla_alunos, 2: self.controla_arbitos, 3: self.controla_curso,
-                        4: self.controla_equipe, 5: self.controla_partida, 6: self.controla_campeonato, 
+                        4: self.controla_equipe, 5: self.controla_campeonato, 
                         0: self.encerra_sistema}
 
         while True:
