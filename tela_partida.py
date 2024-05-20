@@ -1,4 +1,4 @@
-
+import random
 
 class TelaPartida():
     def tela_opcoes_partida(self):
@@ -8,25 +8,31 @@ class TelaPartida():
         print("2: Adicionar partida")
         print("3: Alterar dados partida")
         print("4: Informações da Partida")
-        print("5: Voltar para o menu incial")
+        print("0: Voltar para o menu incial")
         print()
         opcao_escolhida = int(input("Digite a opção desejada: "))
         return opcao_escolhida
     
+    
+    def ecolhe_arbitro(self):
+        arbitro = input("Digite o CPF do arbrito: ")
+        return arbitro
+    
     def solicita_dados_partida(self):
-        print()
-        print("Insira aqui os dados da partida:")
-        id_partida = input("ID da Partida: ")
-        equipe_1 = input("Equipe 1: ")
-        equipe_2 = input("Equipe 2: ")
-        data_partida = input("Data da Partida: ")
-        num_gols_eq1 = input("Número de gols da equipe 1")
-        num_gols_eq2 = input("Número de gols da equipe 2")
-        arbitro = input("Árbitro que apitou a partida")
+        print("-------------")
+        print("Insira os dados")
+        # print("Insira aqui os dados da partida:")
+        # id_partida = input("ID da Partida: ")
+        # equipe_1 = input("Equipe 1: ")
+        # equipe_2 = input("Equipe 2: ")
+        # data_partida = input("Data da Partida: ")
+        # num_gols_eq1 = inputs("Número de gols da equipe 1")
+        # num_gols_eq2 = input("Número de gols da equipe 2")
+        # arbitro = input("Árbitro que apitou a partida")
 
-        return {"id_partida": id_partida, "equipe_1": equipe_1, "equipe_2": equipe_2,
-                "data_partida": data_partida, "num_gols_eq1": num_gols_eq1,
-                "num_gols_eq2": num_gols_eq2, "arbitro": arbitro}
+        # return {"id_partida": id_partida, "equipe_1": equipe_1, "equipe_2": equipe_2,
+        #         "data_partida": data_partida, "num_gols_eq1": num_gols_eq1,
+        #         "num_gols_eq2": num_gols_eq2, "arbitro": arbitro}
 
     def mostra_dados_partida(self, dados_partida):
         print()
@@ -42,6 +48,9 @@ class TelaPartida():
         id_partida = input("Digite o ID da partida que deseja: ")
         return id_partida
 
+    def mostrar_mensagem(self, mensagem):
+        print(mensagem)
+    
     def mostrar_mensagem(self, mensagem):
         print(mensagem)
 

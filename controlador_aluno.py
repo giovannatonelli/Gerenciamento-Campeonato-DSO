@@ -15,7 +15,7 @@ class ControladorAluno():
 
     def inclui_aluno(self):
         dados_aluno = self.__tela_aluno.solicita_dados_aluno()
-        novo_aluno = Aluno (dados_aluno["nome"], dados_aluno["cpf"], dados_aluno["data_nascimento"], dados_aluno["matricula"])
+        novo_aluno = Aluno(dados_aluno["nome"], dados_aluno["cpf"], dados_aluno["data_nascimento"], dados_aluno["matricula"], dados_aluno["curso"])
         if isinstance(novo_aluno, Aluno):
             for aluno in self.__alunos:
                 if novo_aluno.matricula == aluno.matricula:
@@ -25,7 +25,7 @@ class ControladorAluno():
 
     def listar_alunos(self):
         for aluno in self.__alunos:
-            self.__tela_aluno.mostra_dados_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "data_nascimento": aluno.data_nascimento, "matricula": aluno.matricula})
+            self.__tela_aluno.mostra_dados_aluno({"nome": aluno.nome, "cpf": aluno.cpf, "data_nascimento": aluno.data_nascimento, "matricula": aluno.matricula, "curso": aluno.curso})
         if len(self.__alunos) == 0:
             self.__tela_aluno.mostrar_mensagem("A lista de alunos está vazia")
 
@@ -40,6 +40,7 @@ class ControladorAluno():
             aluno.cpf = novos_dados_aluno["cpf"]
             aluno.data_nascimento = novos_dados_aluno["data_nascimento"]
             aluno.matricula =  novos_dados_aluno["matricula"]
+            aluno.curso = novos_dados_aluno["curso"]
             self.__tela_aluno.mostrar_mensagem("Dados Alterados com sucesso")
             self.__tela_aluno.mostra_dados_aluno()
 
@@ -59,8 +60,8 @@ class ControladorAluno():
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()
 
-    def abre_tela(self):
-        lista_opcoes = {1: self.listar_alunos, 2: self.inclui_aluno, 3: self.exclui_aluno, 4: self.altera_aluno, 5: self.retornar_incio}
+    def abre_tela_aluno(self):
+        lista_opcoes = {1: self.listar_alunos, 2: self.inclui_aluno, 3: self.exclui_aluno, 4: self.altera_aluno, 0: self.retornar_incio}
 
         executando = True 
         while executando:

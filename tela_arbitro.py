@@ -19,10 +19,9 @@ class TelaArbitro():
         print("Insira aqui os dados do aluno:")
         nome = input("Nome: ")
         cpf = input("CPF: ")
-        data_nascimento = input("Data de nascimeneto: ")
-        num_partidas = input("Número de Partidas: ")
+        data_nascimento = input("Data de nascimento: ")
 
-        return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento, "num_partidas": num_partidas}
+        return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento}
 
     def mostra_dados_arbitro(self, dados_arbitro):
         print("NOME: ", dados_arbitro["nome"])

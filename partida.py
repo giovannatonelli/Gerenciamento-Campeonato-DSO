@@ -1,24 +1,15 @@
 from arbitro import Arbitro
+from equipe import Equipe
 
 class Partida():
-    def __init__(self, id_partida: int, equipe_1: str, equipe_2: str,
-                arbitro: Arbitro, data_partida: any, num_gols_eq1: int, 
-                num_gols_eq2: int):
-        self._id_partida = id_partida
+    def __init__(self, equipe_1: Equipe, equipe_2: Equipe,
+                arbitro: Arbitro, data_partida: any):
         self._equipe_1 = equipe_1
         self._equipe_2 = equipe_2
         self._arbitro = arbitro
         self._data_partida = data_partida
-        self._num_gols_eq1 = num_gols_eq1
-        self._num_gols_eq2 = num_gols_eq2
-
-    @property
-    def id_partida(self):
-        return self._id_partida
-
-    @id_partida.setter
-    def id_partida(self, id_partida):
-        self._id_partida = id_partida
+        self._num_gols_eq1 = 0
+        self._num_gols_eq2 =  0
     
     @property
     def equipe_1(self):
@@ -26,7 +17,8 @@ class Partida():
 
     @equipe_1.setter
     def equipe_1(self, equipe_1):
-        self._equipe_1 = equipe_1
+        if isinstance(equipe_1, Equipe):
+            self._equipe_1 = equipe_1
     
     @property
     def equipe_2(self):
@@ -34,7 +26,8 @@ class Partida():
 
     @equipe_2.setter
     def equipe_2(self, equipe_2):
-        self._equipe_2 = equipe_2
+        if isinstance(equipe_2, Equipe):
+            self._equipe_2 = equipe_2
 
     @property
     def data_partida(self):

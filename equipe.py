@@ -1,24 +1,38 @@
+from curso import Curso
+from aluno import Aluno
+
+
 class Equipe:
-    def __init__(self, nome, curso=None, alunos=None, num_pontos=0):
-        self.nome = nome
-        self.curso = curso  
-        self.alunos = alunos if alunos else []
-        self.num_pontos = num_pontos
+    def __init__(self, nome, curso: Curso):
+        self.__nome = nome
+        self.__curso = curso  
+        self.__alunos = []
 
-    def get_nome(self):
-        return self.nome
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
 
-    def set_nome(self, nome):
-        self.nome = nome
+    @property
+    def curso(self):
+        return self.__curso
+    
+    @curso.setter
+    def curso(self, curso):
+        if isinstance(curso, Curso):
+            self.__curso = curso
 
-    def get_alunos(self):
-        return self.alunos
-
-    def set_alunos(self, alunos):
-        self.alunos = alunos
-
-    def get_num_pontos(self):
-        return self.num_pontos
-
-    def set_num_pontos(self, num_pontos):
-        self.num_pontos = num_pontos
+    @property
+    def alunos(self):
+        return self.__alunos
+    
+    def adc_alunos(self, aluno: Aluno):
+        self.__alunos.append(aluno)
+    
+    def remove_alunos(self, nome:str):
+        for aluno in self.__alunos:
+            if aluno.nome == nome:
+                self.__alunos.remove(aluno)

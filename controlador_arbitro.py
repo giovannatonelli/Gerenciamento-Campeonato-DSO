@@ -1,3 +1,4 @@
+import random
 from arbitro import Arbitro
 from tela_arbitro import TelaArbitro
 
@@ -14,7 +15,7 @@ class ControladorArbitro():
 
     def inclui_arbitro(self):
         dados_arbitro = self.__tela_arbitro.solicita_dados_arbitro()
-        novo_arbitro = Arbitro (dados_arbitro["nome"], dados_arbitro["cpf"], dados_arbitro["data_nascimento"], dados_arbitro["num_partidas"])
+        novo_arbitro = Arbitro (dados_arbitro["nome"], dados_arbitro["cpf"], dados_arbitro["data_nascimento"])
         if isinstance(novo_arbitro, Arbitro):
             for arbitro in self.__arbitros:
                 if novo_arbitro.cpf == arbitro.cpf:
@@ -38,7 +39,6 @@ class ControladorArbitro():
             arbitro.nome = novos_dados_arbitro["nome"]
             arbitro.cpf = novos_dados_arbitro["cpf"]
             arbitro.data_nascimento = novos_dados_arbitro["data_nascimento"]
-            arbitro.cpf =  novos_dados_arbitro["cpf"]
 
     def exclui_arbitro(self):
         self.__listar_arbitros()
@@ -53,12 +53,15 @@ class ControladorArbitro():
         else:
             self.__tela_arbitro.mostrar_mensagem("Esse arbitro não existe")
 
+    def busca_arbitro(self):
+        return random.choice(self.__arbitros)
+
     #def adicionar_num_partidas(self):
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()
 
-    def abre_tela(self):
+    def abre_tela_arbitro(self):
         lista_opcoes = {1: self.listar_arbitros, 2: self.inclui_arbitro, 3: self.exclui_arbitro, 4: self.altera_arbitro, 5: self.retornar_incio}
 
         executando = True 

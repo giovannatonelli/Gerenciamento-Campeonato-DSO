@@ -5,9 +5,12 @@ class TelaSistema():
     def tela_opcoes(self):
         print("-------- GERENCIAMENTO DE CAMPEONATOS DE FUTEBOL DA UFSC ---------")
         print("Escolha sua opcao")
-        print("1 - Alunos")
-        print("2 - Árbitros")
-        print("3 - Equipes") #add demais
-        print("0 - Finalizar sistema")
+        print("1: Alunos")
+        print("2: Árbitros")
+        print("3: Cursos") 
+        print("4: Equipes")
+        print("5: Partida")
+        print("6: Campeonato")
+        print("0: Finalizar sistema")
         opcao = int(input("Escolha a opcão: "))
         return opcao

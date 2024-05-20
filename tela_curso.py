@@ -26,3 +26,6 @@ class TelaCurso:
             print(f"Equipe associada: {curso.equipe.nome}")
         else:
             print("Nenhuma equipe associada a este curso.")
+
+    def mostrar_mensagem(self, mensagem):
+        print(mensagem)

@@ -17,18 +17,25 @@ class TelaEquipe:
     def solicita_equipe(self):
         nome = input("Digite o nome da equipe: ")
         return nome
+    
+    def solicita_curso(self):
+        return input("Digite o nome do curso: ")
+    
 
     def mostra_dados_equipe(self, equipe):
-        print(f"Nome: {equipe.get_nome()}")
+        print(f"Nome: {equipe.nome}")
         print("Alunos:")
-        for aluno in equipe.get_alunos():
+        for aluno in equipe.alunos:
             print(f"  - {aluno.nome}") 
 
     def mostrar_mensagem(self, mensagem):
         print(mensagem)
 
     def mostra_curso_equipe(self, equipe):
-        print(f"Curso da equipe {equipe.get_nome()}: {equipe.curso.nome if equipe.curso else 'Não definido'}")
+        print(f"Curso da equipe {equipe.nome}: {equipe.curso.nome if equipe.curso else 'Não definido'}")
 
     def mostra_pontos_equipe(self, equipe):
-        print(f"Número de pontos da equipe {equipe.get_nome()}: {equipe.get_num_pontos()}")
+        print(f"Número de pontos da equipe {equipe.nome}: {equipe.num_pontos}")
+
+    def mostrar_mensagem(self, mensagem):
+        print(mensagem)
