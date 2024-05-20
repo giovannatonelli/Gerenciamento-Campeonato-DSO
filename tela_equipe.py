@@ -21,6 +21,8 @@ class TelaEquipe:
     def solicita_curso(self):
         return input("Digite o nome do curso: ")
     
+    def solicita_matricula_aluno(self):
+        return input("Digite a matricula do aluno que deseja adicionar à equipe: ")
 
     def mostra_dados_equipe(self, equipe):
         print(f"Nome: {equipe.nome}")

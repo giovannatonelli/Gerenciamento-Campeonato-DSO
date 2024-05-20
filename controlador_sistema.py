@@ -73,6 +73,9 @@ class ControladorSistema:
     
     def valida_curso(self, curso: str):
         return self.__controlador_curso.valida_curso(curso)
+    
+    def pega_aluno_por_matricula(self, matricula_aluno):
+        return self.__controlador_aluno.pega_aluno_por_matricula(matricula_aluno)
 
 ##################################################################
     def encerra_sistema(self):
