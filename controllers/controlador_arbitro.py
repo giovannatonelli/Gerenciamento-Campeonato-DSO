@@ -33,8 +33,7 @@ class ControladorArbitro():
             self.__tela_arbitro.mostrar_mensagem("A lista está vazia")
 
     def altera_arbitro(self):
-        self.lista_arbitros()
-        cpf_arbitro = self.__tela_arbitro.seleciona_arbitro()
+        cpf_arbitro = self.__tela_arbitro.escolhe_arbitro()
         arbitro = self.pega_arbitro_por_cpf(cpf_arbitro)
 
         if(arbitro is not None):

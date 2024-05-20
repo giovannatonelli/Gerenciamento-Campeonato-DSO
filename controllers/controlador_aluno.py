@@ -1,4 +1,4 @@
-from aluno import Aluno
+from models.aluno import Aluno
 from tela_aluno import TelaAluno
 
 
@@ -33,7 +33,6 @@ class ControladorAluno():
             self.__tela_aluno.mostrar_mensagem("A lista de alunos está vazia")
 
     def altera_aluno(self):
-        self.listar_alunos()
         matricula_aluno = self.__tela_aluno.seleciona_aluno()
         aluno = self.pega_aluno_por_matricula(matricula_aluno)
 
@@ -45,7 +44,7 @@ class ControladorAluno():
             aluno.matricula =  novos_dados_aluno["matricula"]
             aluno.curso = novos_dados_aluno["curso"]
             self.__tela_aluno.mostrar_mensagem("Dados Alterados com sucesso")
-            self.__tela_aluno.mostra_dados_aluno()
+            self.__tela_aluno.mostra_dados_aluno(novos_dados_aluno)
 
     def exclui_aluno(self):
         self.listar_alunos()

@@ -16,10 +16,23 @@ class TelaArbitro():
 
     def solicita_dados_arbitro(self):
         print()
-        print("Insira aqui os dados do aluno:")
-        nome = input("Nome: ")
-        cpf = input("CPF: ")
-        data_nascimento = input("Data de nascimento: ")
+        print("Insira aqui os dados do árbitro:")
+        while True:
+            try:
+                nome = input("Nome: ").strip()
+                if not nome:
+                    raise ValueError("Nome inválido. Por favor, insira um nome válido.")
+                
+                cpf = input("CPF: ").strip()
+                if not cpf.isdigit() or len(cpf) != 11:
+                    raise ValueError("CPF inválido. Por favor, insira um CPF válido contendo apenas dígitos.")
+
+                data_nascimento = input("Data de nascimento(ddmmyy): ").strip()
+
+            except ValueError as e:
+                print("Erro:", e)
+                
+    
 
         return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento}
 
