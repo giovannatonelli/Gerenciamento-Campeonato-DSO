@@ -32,7 +32,7 @@ class TelaArbitro():
             except ValueError as e:
                 print("Erro:", e)
                 
-    
+            break
 
         return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento}
 

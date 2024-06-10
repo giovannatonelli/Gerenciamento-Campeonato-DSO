@@ -1,4 +1,4 @@
-from models.aluno import Aluno
+from aluno import Aluno
 from tela_aluno import TelaAluno
 
 

@@ -1,6 +1,6 @@
 from tela_equipe import TelaEquipe
 from equipe import Equipe
-from models.aluno import Aluno
+from aluno import Aluno
 from curso import Curso
 
 
