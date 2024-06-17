@@ -2,7 +2,6 @@ from pessoa import Pessoa
 from curso import Curso
 
 
-
 class Aluno(Pessoa):
     def __init__(self, nome: str, cpf: str, data_nascimento, matricula: str, curso: Curso):
         super().__init__(nome, cpf, data_nascimento)

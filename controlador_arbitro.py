@@ -50,15 +50,12 @@ class ControladorArbitro():
         if(arbitro is not None):
             self.__arbitros.remove(arbitro)
             self.__tela.arbitro.mostrar_mensagem("arbitro removido com sucesso")
-            #avaliar possibilidade de colocar uma opcao "deseja listar os arbitros?"
             self.listar_arbitros()
         else:
             self.__tela_arbitro.mostrar_mensagem("Esse arbitro não existe")
 
     def busca_arbitro(self):
         return random.choice(self.__arbitros)
-
-    #def adicionar_num_partidas(self):
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()

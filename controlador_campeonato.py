@@ -136,7 +136,19 @@ class ControladorCampeonato:
             opcao_escolhida = self.__tela_campeonato_selecionado.tela_opcoes_campeonato_selecionado(self.__campeonato)
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
+            
+    def definir_podio(self):
+        podio = sorted(self.__pontuacao.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+        return podio
+    
+    def adiciona_pontucao_equipe(self, nome:str, pont:int):
+        self.__pontuacao[nome][0] += pont
 
+    def adiciona_saldo_de_gols(self, nome:str, sg:int):
+        self.__pontuacao[nome][1] += sg
+    
+    def gera_tabela_pontuacao(self):
+        self.__pontuacao = {item: [0, 0] for item in self.__equipes}
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()

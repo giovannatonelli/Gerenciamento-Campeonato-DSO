@@ -110,16 +110,6 @@ class ControladorEquipe:
                 self.__tela_equipe.mostrar_mensagem("O aluno inserido não é do curso dessa equipe")
         else:
             self.__tela_equipe.mostrar_mensagem("Equipe não encontrada!")
-    # def adicionar_aluno_equipe(self):
-    #     nome_equipe = self.__tela_equipe.solicita_equipe()
-    #     equipe = self.pega_equipe_por_nome(nome_equipe)
-    #     if equipe:
-    #         nome_aluno = input("Digite o nome do aluno: ")
-    #         aluno = Aluno(nome_aluno, None, None, None)
-    #         equipe.alunos.append(aluno)
-    #         self.__tela_equipe.mostrar_mensagem("Aluno adicionado à equipe!")
-    #     else:
-    #         self.__tela_equipe.mostrar_mensagem("Equipe não encontrada!")
 
     def remover_aluno_equipe(self):
         nome_equipe = self.__tela_equipe.solicita_equipe()
