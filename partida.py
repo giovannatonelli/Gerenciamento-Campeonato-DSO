@@ -1,5 +1,5 @@
-from arbitro import Arbitro
-from equipe import Equipe
+from entidades.arbitro import Arbitro
+from entidades.equipe import Equipe
 
 class Partida():
     def __init__(self, equipe_1: Equipe, equipe_2: Equipe,
