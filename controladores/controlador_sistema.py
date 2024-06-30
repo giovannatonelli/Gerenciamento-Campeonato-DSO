@@ -5,7 +5,6 @@ from controladores.controlador_partida import ControladorPartida
 from controladores.controlador_campeonato import ControladorCampeonato
 from controladores.controlador_curso import ControladorCurso
 from controladores.controlador_equipe import ControladorEquipe
-import datetime
 
 class ControladorSistema:
     def __init__(self):
@@ -104,15 +103,7 @@ class ControladorSistema:
             return True
         else:
             return False
-
-    def valida_data_nascimento(self, data_nascimento):
-        dia, mes, ano = map(int, data_nascimento.split('/'))
-        try:
-            datetime.date(ano, mes, dia)
-            return True
-        except ValueError:
-            return False
-                
+            
     def encerra_sistema(self):
         exit(0)
 

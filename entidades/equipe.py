@@ -36,3 +36,9 @@ class Equipe:
         for aluno in self.__alunos:
             if aluno.nome == nome:
                 self.__alunos.remove(aluno)
+
+    def __str__(self) -> str:
+        return self.__nome
+    
+    def __repr__(self):
+        return self.__nome

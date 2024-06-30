@@ -4,6 +4,7 @@ from telas.tela_arbitro import TelaArbitro
 from exceptions.arbitro_exceptions import ArbitroRepetidoException
 from exceptions.lista_vazia_exception import ListaVaziaException
 from exceptions.pessoas_exceptions import PessoaNCadastradaException
+from exceptions.arbitro_exceptions import ArbitroNCadastradoException
 
 class ControladorArbitro():
     def __init__(self, controlador_sistema):
@@ -72,7 +73,14 @@ class ControladorArbitro():
                 self.__tela_arbitro.mostrar_mensagem(e)
 
     def busca_arbitro(self):
-        return random.choice(self.__arbitros)
+        try:
+            if len(self.__arbitros) == 0:
+                raise ArbitroNCadastradoException
+            else:
+                return random.choice(self.__arbitros)
+        except ArbitroNCadastradoException as e:
+            self.__tela_arbitro.mostrar_mensagem(e)
+        
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()
