@@ -44,9 +44,15 @@ class TelaCampeonato:
         self.close()
         return nome_campeonato
 
-    def mostra_dados_campeonato(self, campeonato):
-        sg.popup_scrolled(f"Nome do Campeonato: {campeonato.nome_campeonato}\n\nEquipes:\n" +
-                          '\n'.join([f"  - {equipe.nome}" for equipe in campeonato.equipes]), title='Dados do Campeonato', font=("Times New Roman", 14))
+   
+    def mostra_dados_campeonatos(self, todos_dados_campeonatos):
+        layout = [
+            [sg.Text('-------- DADOS DOS CAMPEONATOS ----------')], 
+            [sg.Multiline(todos_dados_campeonatos, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Dados dos Campeonatos", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def mostra_partidas_campeonato(self, campeonato):
         sg.popup_scrolled(f"Partidas do Campeonato {campeonato.nome_campeonato}:\n\n" +

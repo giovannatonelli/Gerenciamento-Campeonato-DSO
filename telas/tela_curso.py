@@ -58,15 +58,29 @@ class TelaCurso:
             [sg.Text('Código:', size=(15, 1), font=("Times New Roman", 12)), sg.InputText('', key='codigo')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Seleciona Curso').Layout(layout)
-
-        button, values = self.open()
-        codigo = values['codigo']
-        self.close()
+        self.__window = sg.Window('Selecionar Curso', layout, resizable=True)
+        
+        while True:
+            event, values = self.__window.read()
+            if event == sg.WINDOW_CLOSED or event == 'Cancelar':
+                codigo = None  # Define como None se cancelar
+                break
+            elif event == 'Confirmar':
+                codigo = values['codigo']
+                break
+        
+        self.__window.close()
         return codigo
 
-    def mostra_dados_curso(self, curso):
-        sg.popup(f"Código: {curso.codigo_curso}\nNome: {curso.nome_curso}", title='Dados do Curso', font=("Times New Roman", 14))
+    def mostra_dados_cursos(self, todos_dados_cursos):
+        layout = [
+            [sg.Text('-------- DADOS DOS CURSOS ----------')], 
+            [sg.Multiline(todos_dados_cursos, size=(50, 20), disabled=True)]
+            
+        ]
+        self.__window = sg.Window("Dados dos Cursos", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def mostra_equipe_curso(self, curso):
         if curso.equipe:

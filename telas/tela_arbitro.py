@@ -54,9 +54,14 @@ class TelaArbitro:
         self.close()
         return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento}
 
-    def mostra_dados_arbitro(self, dados_arbitro):
-        string_todos_arbitros = f"NOME: {dados_arbitro['nome']}\nCPF: {dados_arbitro['cpf']}\nDATA DE NASCIMENTO: {dados_arbitro['data_nascimento']}\nNÚMERO DE PARTIDAS: {dados_arbitro['num_partidas']}\n"
-        sg.Popup('-------- DADOS DO ÁRBITRO ----------', string_todos_arbitros)
+    def mostra_dados_arbitro(self, todos_dados_arbitros):
+        layout = [
+            [sg.Text('-------- DADOS DOS ÁRBITROS ----------')], 
+            [sg.Multiline(todos_dados_arbitros, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Dados dos Árbitros", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def escolhe_arbitro(self):
         sg.theme('BlueMono')

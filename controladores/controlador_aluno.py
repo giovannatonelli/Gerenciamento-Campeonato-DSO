@@ -4,11 +4,12 @@ from exceptions.alunos_exceptions import AlunoRepetidoException
 from exceptions.cursos_exceptions import CursoNExisteException
 from exceptions.pessoas_exceptions import PessoaNCadastradaException
 from exceptions.lista_vazia_exception import ListaVaziaException
-
+from DAOS.aluno_dao import AlunoDAO
 
 class ControladorAluno():
     def __init__(self, controlador_sistema):
         self.__alunos = []
+        self.__aluno_DAO = Aluno
         self.__tela_aluno = TelaAluno()
         self.__controlador_sistema = controlador_sistema
 
@@ -18,8 +19,6 @@ class ControladorAluno():
                 return aluno
             else:
                 return None
-            
-
 
     def inclui_aluno(self):
         dados_aluno = self.__tela_aluno.solicita_dados_aluno()
@@ -53,14 +52,16 @@ class ControladorAluno():
 
     def listar_alunos(self):
         try:
-            for aluno in self.__alunos:
-                self.__tela_aluno.mostra_dados_aluno({"nome": aluno.nome,
-                                                      "cpf": aluno.cpf, 
-                                                      "data_nascimento": aluno.data_nascimento, 
-                                                      "matricula": aluno.matricula, 
-                                                      "curso": aluno.curso})
             if len(self.__alunos) == 0:
                 raise ListaVaziaException()
+            
+            todos_dados_alunos = ""
+            for aluno in self.__alunos:
+                dados_aluno = f"NOME: {aluno.nome}\nCPF: {aluno.cpf}\nDATA DE NASCIMENTO: {aluno.data_nascimento}\nMATRÍCULA: {aluno.matricula}\nCURSO: {aluno.curso}\n\n"
+                todos_dados_alunos += dados_aluno
+            
+            self.__tela_aluno.mostra_dados_aluno(todos_dados_alunos)
+        
         except ListaVaziaException as e:
             self.__tela_aluno.mostrar_mensagem(e)
 

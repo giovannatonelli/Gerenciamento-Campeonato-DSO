@@ -4,7 +4,7 @@ from telas.tela_campeonato import TelaCampeonato
 from telas.tela_campeonato_selecioando import TelaCampeonatoSelecionado
 from controladores.controlador_arbitro import ControladorArbitro
 from entidades.arbitro import Arbitro
-from partida import Partida
+from entidades.partida import Partida
 from entidades.equipe import Equipe
 from itertools import combinations
 import random

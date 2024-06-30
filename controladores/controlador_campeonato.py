@@ -2,7 +2,7 @@ from telas.tela_campeonato import TelaCampeonato
 from telas.tela_campeonato_selecioando import TelaCampeonatoSelecionado
 from entidades.campeonato import Campeonato
 from entidades.equipe import Equipe
-from partida import Partida
+from entidades.partida import Partida
 from itertools import combinations
 import random
 from datetime import datetime, timedelta
@@ -129,13 +129,19 @@ class ControladorCampeonato:
         
     def listar_campeonatos(self):
         try:
-            if self.__campeonatos:
-                for campeonato in self.__campeonatos:
-                    self.__tela_campeonato.mostra_dados_campeonato(campeonato)
-            else:
+            if not self.__campeonatos:
                 raise ListaVaziaException()
+            
+            todos_dados_campeonatos = ""
+            for campeonato in self.__campeonatos:
+                dados_campeonato = f"Nome do Campeonato: {campeonato.nome_campeonato}\n\nEquipes:\n" + \
+                                '\n'.join([f"  - {equipe.nome}" for equipe in campeonato.equipes]) + "\n\n"
+                todos_dados_campeonatos += dados_campeonato
+            
+            self.__tela_campeonato.mostra_dados_campeonatos(todos_dados_campeonatos)
+        
         except ListaVaziaException as e:
-                self.__tela_campeonato.mostrar_mensagem(e)
+            self.__tela_campeonato.mostrar_mensagem(e)
 
     def abre_tela_campeonato(self):
         lista_opcoes = {1: self.cria_novo_campeonato, 
@@ -160,10 +166,6 @@ class ControladorCampeonato:
             opcao_escolhida = self.__tela_campeonato_selecionado.tela_opcoes_campeonato_selecionado(self.__campeonato)
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
-
-    def definir_podio(self):
-        podio = sorted(self.__pontuacao.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
-        return podio
 
     def retornar_incio(self):
         self.__controlador_sistema.abre_tela()

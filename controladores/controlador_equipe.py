@@ -71,11 +71,17 @@ class ControladorEquipe:
 
     def listar_equipes(self):
         try:
-            if self.__equipes:
-                for equipe in self.__equipes:
-                    self.__tela_equipe.mostra_dados_equipe(equipe)
-            else:
-                raise ListaVaziaException
+            if not self.__equipes:
+                raise ListaVaziaException()
+            
+            todos_dados_equipes = ""
+            for equipe in self.__equipes:
+                dados_equipe = f"Nome: {equipe.nome}\n\nAlunos:\n" + \
+                            '\n'.join([f"  - {aluno.nome}" for aluno in equipe.alunos]) + "\n\n"
+                todos_dados_equipes += dados_equipe
+            
+            self.__tela_equipe.mostra_dados_equipes(todos_dados_equipes)
+        
         except ListaVaziaException as e:
             self.__tela_equipe.mostrar_mensagem(e)
     

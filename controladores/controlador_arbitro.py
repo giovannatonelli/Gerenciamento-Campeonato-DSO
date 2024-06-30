@@ -40,13 +40,16 @@ class ControladorArbitro():
 
     def listar_arbitros(self):
         try:
-            for arbitro in self.__arbitros:
-                self.__tela_arbitro.mostra_dados_arbitro({"nome": arbitro.nome, 
-                                                          "cpf": arbitro.cpf, 
-                                                          "data_nascimento": arbitro.data_nascimento, 
-                                                          "num_partidas": arbitro.num_partidas})
             if len(self.__arbitros) == 0:
                 raise ListaVaziaException()
+            
+            todos_dados_arbitros = ""
+            for arbitro in self.__arbitros:
+                dados_arbitro = f"NOME: {arbitro.nome}\nCPF: {arbitro.cpf}\nDATA DE NASCIMENTO: {arbitro.data_nascimento}\nNÚMERO DE PARTIDAS: {arbitro.num_partidas}\n\n"
+                todos_dados_arbitros += dados_arbitro
+            
+            self.__tela_arbitro.mostra_dados_arbitro(todos_dados_arbitros)
+
         except ListaVaziaException as e:
             self.__tela_arbitro.mostrar_mensagem(e)
 

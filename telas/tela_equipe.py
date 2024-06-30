@@ -99,9 +99,14 @@ class TelaEquipe:
         self.close()
         return matricula_aluno
 
-    def mostra_dados_equipe(self, equipe):
-        sg.popup_scrolled(f"Nome: {equipe.nome}\n\nAlunos:\n" +
-                          '\n'.join([f"  - {aluno.nome}" for aluno in equipe.alunos]), title='Dados da Equipe', font=("Times New Roman", 14))
+    def mostra_dados_equipes(self, todos_dados_equipes):
+        layout = [
+            [sg.Text('-------- DADOS DAS EQUIPES ----------')], 
+            [sg.Multiline(todos_dados_equipes, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Dados das Equipes", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def mostra_curso_equipe(self, equipe):
         if equipe.curso:

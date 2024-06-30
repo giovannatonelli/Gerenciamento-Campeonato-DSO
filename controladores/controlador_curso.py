@@ -65,11 +65,15 @@ class ControladorCurso:
 
     def listar_cursos(self):
         try:
-            if self.__cursos:
-                for curso in self.__cursos:
-                    self.__tela_curso.mostra_dados_curso(curso)
-            else:
-                raise ListaVaziaException
+            if not self.__cursos:
+                raise ListaVaziaException()
+            
+            todos_dados_cursos = ""
+            for curso in self.__cursos:
+                dados_curso = f"Código: {curso.codigo_curso}\nNome: {curso.nome_curso}\n\n"
+                todos_dados_cursos += dados_curso
+                self.__tela_curso.mostra_dados_cursos(todos_dados_cursos)
+    
         except ListaVaziaException as e:
             self.__tela_curso.mostrar_mensagem(e)
 

@@ -58,9 +58,14 @@ class TelaAluno:
         self.close()
         return {"nome": nome, "cpf": cpf, "data_nascimento": data_nascimento, "matricula": matricula, "curso": curso}
 
-    def mostra_dados_aluno(self, dados_aluno):
-        string_todos_alunos = f"NOME: {dados_aluno['nome']}\nCPF: {dados_aluno['cpf']}\nDATA DE NASCIMENTO: {dados_aluno['data_nascimento']}\nMATRÍCULA: {dados_aluno['matricula']}\nCURSO: {dados_aluno['curso']}\n"
-        sg.Popup('-------- DADOS DO ALUNO ----------', string_todos_alunos)                         
+    def mostra_dados_aluno(self, todos_dados_alunos):
+        layout = [
+            [sg.Text('-------- DADOS DOS ALUNOS ----------')], 
+            [sg.Multiline(todos_dados_alunos, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Dados dos Alunos", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def seleciona_aluno(self):
         sg.theme('BlueMono')

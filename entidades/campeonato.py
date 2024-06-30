@@ -34,7 +34,7 @@ class Campeonato:
     def definir_podio(self):
         podio = sorted(self.__pontuacao.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
         return podio
-    
+
     def adiciona_pontucao_equipe(self, nome:str, pont:int):
         self.__pontuacao[nome][0] += pont
 
