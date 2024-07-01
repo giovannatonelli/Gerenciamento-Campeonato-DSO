@@ -8,10 +8,11 @@ from exceptions.alunos_exceptions import AlunoNaoPertenceCursoException
 from exceptions.alunos_exceptions import AlunoJaAdicionadoException
 from exceptions.alunos_exceptions import AlunoNaoPertenceEquipeException
 from exceptions.alunos_exceptions import AlunoNaoExisteException
-
+from DAOS.equipe_dao import EquipeDAO
 class ControladorEquipe:
     def __init__(self, controlador_sistema):
-        self.__equipes = []
+        self.__equipe_DAO = EquipeDAO()
+        #self.__equipes = []
         self.__tela_equipe = TelaEquipe()
         self.__controlador_sistema = controlador_sistema
 
@@ -28,10 +29,10 @@ class ControladorEquipe:
             nova_equipe = Equipe(dados_equipe["nome"],
                             dados_equipe["curso"])
             if isinstance(nova_equipe, Equipe):
-                for equipe in self.__equipes:
+                for equipe in self.__equipe_DAO.get_all():
                     if nova_equipe.nome == equipe.nome:
                         raise EquipeRepetidaException()
-                self.__equipes.append(nova_equipe)
+                self.__equipe_DAO.add(nova_equipe)
                 self.__tela_equipe.mostrar_mensagem("Equipe adicionada com sucesso!")
                 return nova_equipe
         except EquipeRepetidaException as e:
@@ -56,7 +57,7 @@ class ControladorEquipe:
         equipe = self.pega_equipe_por_nome(nome)
         try:
             if equipe:
-                self.__equipes.remove(equipe)
+                self.__equipe_DAO.remove(equipe.nome)
                 self.__tela_equipe.mostrar_mensagem("Equipe removida com sucesso!")
             else:
                 raise EquipeNaoExisteException
@@ -64,18 +65,18 @@ class ControladorEquipe:
             self.__tela_equipe.mostrar_mensagem(e)
 
     def pega_equipe_por_nome(self, nome):
-        for equipe in self.__equipes:
+        for equipe in self.__equipe_DAO.get_all():
             if equipe.nome == nome:
                 return equipe
         return None
 
     def listar_equipes(self):
         try:
-            if not self.__equipes:
+            if not self.__equipe_DAO:
                 raise ListaVaziaException()
             
             todos_dados_equipes = ""
-            for equipe in self.__equipes:
+            for equipe in self.__equipe_DAO.get_all():
                 dados_equipe = f"Nome: {equipe.nome}\n\nAlunos:\n" + \
                             '\n'.join([f"  - {aluno.nome}" for aluno in equipe.alunos]) + "\n\n"
                 todos_dados_equipes += dados_equipe

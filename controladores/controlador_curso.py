@@ -3,11 +3,12 @@ from entidades.curso import Curso
 from exceptions.cursos_exceptions import CursoJaCadastradoException
 from exceptions.cursos_exceptions import CursoNCadastradoException
 from exceptions.lista_vazia_exception import ListaVaziaException
-
+from DAOS.curso_dao import CursoDAO
 
 class ControladorCurso:
     def __init__(self, controlador_sistema):
-        self.__cursos = []
+        #self.__curso_DAO = []
+        self.__curso_DAO = CursoDAO()
         self.__tela_curso = TelaCurso()
         self.__controlador_sistema = controlador_sistema
 
@@ -16,10 +17,10 @@ class ControladorCurso:
         try:
             novo_curso = Curso(codigo, nome)
             if isinstance(novo_curso, Curso):
-                for c in self.__cursos:
+                for c in self.__curso_DAO.get_all():
                     if c.codigo_curso == novo_curso.codigo_curso:
                         raise CursoJaCadastradoException()
-                self.__cursos.append(novo_curso)
+                self.__curso_DAO.add(novo_curso)
                 self.__tela_curso.mostrar_mensagem("Curso adicionado com sucesso!")
                 return novo_curso
         except CursoJaCadastradoException as e:
@@ -44,7 +45,7 @@ class ControladorCurso:
         curso = self.pega_curso_por_codigo(codigo)
         try:
             if curso:
-                self.__cursos.remove(curso)
+                self.__curso_DAO.remove(curso.codigo_curso)
                 self.__tela_curso.mostrar_mensagem("Curso excluído com sucesso!")
             else:
                 raise CursoNCadastradoException
@@ -52,24 +53,24 @@ class ControladorCurso:
             self.__tela_curso.mostrar_mensagem(e)
 
     def valida_curso(self, nome):
-        for curso in self.__cursos:
+        for curso in self.__curso_DAO.get_all():
             if curso.nome_curso == nome:
                 return curso
         return None
 
     def pega_curso_por_codigo(self, codigo):
-        for curso in self.__cursos:
+        for curso in self.__curso_DAO.get_all():
             if curso.codigo_curso == codigo:
                 return curso
         return None
 
     def listar_cursos(self):
         try:
-            if not self.__cursos:
+            if not self.__curso_DAO:
                 raise ListaVaziaException()
             
             todos_dados_cursos = ""
-            for curso in self.__cursos:
+            for curso in self.__curso_DAO.get_all():
                 dados_curso = f"Código: {curso.codigo_curso}\nNome: {curso.nome_curso}\n\n"
                 todos_dados_cursos += dados_curso
                 self.__tela_curso.mostra_dados_cursos(todos_dados_cursos)

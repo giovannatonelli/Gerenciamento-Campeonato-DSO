@@ -8,17 +8,16 @@ from DAOS.aluno_dao import AlunoDAO
 
 class ControladorAluno():
     def __init__(self, controlador_sistema):
-        self.__alunos = []
-        self.__aluno_DAO = Aluno
+        #self.__alunos = []
+        self.__aluno_DAO = AlunoDAO()
         self.__tela_aluno = TelaAluno()
         self.__controlador_sistema = controlador_sistema
 
     def pega_aluno_por_matricula(self, matricula: str):
-        for aluno in self.__alunos:
+        #for aluno in self.__alunos:
+        for aluno in self.__aluno_DAO.get_all():
             if(aluno.matricula == matricula):
                 return aluno
-            else:
-                return None
 
     def inclui_aluno(self):
         dados_aluno = self.__tela_aluno.solicita_dados_aluno()
@@ -39,10 +38,12 @@ class ControladorAluno():
                 raise ValueError("CPF inválido. Por favor, digite um cpf válido")
             elif isinstance(novo_aluno, Aluno):
                 try:
-                    for aluno in self.__alunos:
+                    for aluno in self.__aluno_DAO.get_all():
+                    #for aluno in self.__alunos:
                         if novo_aluno.matricula == aluno.matricula:
                             raise AlunoRepetidoException()
-                    self.__alunos.append(novo_aluno)
+                    #self.__alunos.append(novo_aluno)
+                    self.__aluno_DAO.add(novo_aluno)
                     self.__tela_aluno.mostrar_mensagem("Aluno adicionado com sucesso!")
                     return novo_aluno
                 except AlunoRepetidoException as e:
@@ -52,11 +53,13 @@ class ControladorAluno():
 
     def listar_alunos(self):
         try:
-            if len(self.__alunos) == 0:
+            #if len(self.__alunos) == 0:
+            if len(self.__aluno_DAO.get_all()) == 0:
                 raise ListaVaziaException()
             
             todos_dados_alunos = ""
-            for aluno in self.__alunos:
+            for aluno in self.__aluno_DAO.get_all():
+            #for aluno in self.__alunos:
                 dados_aluno = f"NOME: {aluno.nome}\nCPF: {aluno.cpf}\nDATA DE NASCIMENTO: {aluno.data_nascimento}\nMATRÍCULA: {aluno.matricula}\nCURSO: {aluno.curso}\n\n"
                 todos_dados_alunos += dados_aluno
             
@@ -76,15 +79,16 @@ class ControladorAluno():
             aluno.data_nascimento = novos_dados_aluno["data_nascimento"]
             aluno.matricula =  novos_dados_aluno["matricula"]
             aluno.curso = novos_dados_aluno["curso"]
+            self.__aluno_DAO.update(aluno)
             self.__tela_aluno.mostrar_mensagem("Dados Alterados com sucesso")
-            self.__tela_aluno.mostra_dados_aluno(novos_dados_aluno)
 
     def exclui_aluno(self):
         matricula_aluno = self.__tela_aluno.seleciona_aluno()
         aluno = self.pega_aluno_por_matricula(matricula_aluno)
         try:
             if(aluno is not None):
-                self.__alunos.remove(aluno)
+                #self.__alunos.remove(aluno)
+                self.__aluno_DAO.remove(aluno.matricula)
                 self.__tela_aluno.mostrar_mensagem("Aluno removido com sucesso")
                 self.listar_alunos()
             else:
@@ -102,6 +106,6 @@ class ControladorAluno():
                         4: self.altera_aluno, 
                         0: self.retornar_incio}
 
-        executando = True 
+        executando = True
         while executando:
             lista_opcoes[self.__tela_aluno.tela_opcoes_aluno()]()

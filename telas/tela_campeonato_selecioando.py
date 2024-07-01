@@ -58,7 +58,7 @@ class TelaCampeonatoSelecionado:
         sg.popup(f"  - {partida.equipe_1.nome} {partida.num_gols_eq1}    x   {partida.num_gols_eq2} {partida.equipe_2.nome}  - {partida.data_partida}", font=("Times New Roman", 14))
 
     def mostrar_podio(self, podio: dict):
-        podio_str = '\n'.join([f"Time: {chave.nome}, Pontos: {valor[0]}, Saldo de Gols: {valor[1]}" for chave, valor in podio.items()])
+        podio_str = '\n'.join([f"Time: {chave.nome}, Pontos: {valor[0]}, Saldo de Gols: {valor[1]}" for chave, valor in podio])
         sg.popup_scrolled(podio_str, title='Pódio', font=("Times New Roman", 14))
 
     def mostrar_mensagem(self, msg: str):

@@ -10,11 +10,12 @@ from exceptions.campeonato_exceptions import CampeonatoNaoExisteException
 from exceptions.campeonato_exceptions import EquipesInsuficientesException
 from exceptions.equipes_exceptions import EquipeNaoExisteException
 from exceptions.lista_vazia_exception import ListaVaziaException
-
+from DAOS.campeonato_dao import CampeonatoDAO
 
 class ControladorCampeonato:
     def __init__(self, controlador_sistema):
-        self.__campeonatos = []
+        #self.__campeonato_DAO = []
+        self.__campeonato_DAO = CampeonatoDAO()
         self.__tela_campeonato = TelaCampeonato()
         self.__campeonato = None
         self.__tela_campeonato_selecionado = TelaCampeonatoSelecionado()
@@ -23,18 +24,17 @@ class ControladorCampeonato:
     def cria_novo_campeonato(self):
         nome_campeonato = self.__tela_campeonato.solicita_nome_campeonato()
         novo_campeonato = Campeonato(nome_campeonato)
-        self.__campeonatos.append(novo_campeonato)
+        self.__campeonato_DAO.add(novo_campeonato)
         self.__campeonato = novo_campeonato
 
     def seleciona_campeonato(self):
         try:
             nome = self.__tela_campeonato.solicita_nome_campeonato()
-            if len(self.__campeonatos) == 0:
+            if len(self.__campeonato_DAO.get_all()) == 0:
                 raise CampeonatoNaoExisteException()
-            for campeonato in self.__campeonatos:
+            for campeonato in self.__campeonato_DAO.get_all():
                 if campeonato.nome_campeonato == nome:
                     self.__campeonato = campeonato
-                    self.mostra_dados_do_campeonato()
                     self.abre_tela_campeonato_selecionado()
                 else:
                     raise CampeonatoNaoExisteException()
@@ -60,7 +60,7 @@ class ControladorCampeonato:
                 raise EquipesInsuficientesException()
         except EquipesInsuficientesException as e:
                 self.__tela_campeonato_selecionado.mostrar_mensagem(e)
-                self.__abre_tela_campeonato_selecionado()
+
 
     def gera_resultado_partida(self):
         for partida in self.__campeonato.partidas:
@@ -102,7 +102,7 @@ class ControladorCampeonato:
         return False
 
     def mostra_dados_do_campeonato(self):
-        self.__tela_campeonato.mostra_dados_campeonato(self.__campeonato)
+        self.__tela_campeonato.mostra_dados_campeonatos(self.__campeonato)
 
     def mostrar_nome_campeonato(self):
         self.__tela_campeonato_selecionado.mostra_nome_campeonato(self.__campeonato)
@@ -129,11 +129,11 @@ class ControladorCampeonato:
         
     def listar_campeonatos(self):
         try:
-            if not self.__campeonatos:
+            if not self.__campeonato_DAO:
                 raise ListaVaziaException()
             
             todos_dados_campeonatos = ""
-            for campeonato in self.__campeonatos:
+            for campeonato in self.__campeonato_DAO.get_all():
                 dados_campeonato = f"Nome do Campeonato: {campeonato.nome_campeonato}\n\nEquipes:\n" + \
                                 '\n'.join([f"  - {equipe.nome}" for equipe in campeonato.equipes]) + "\n\n"
                 todos_dados_campeonatos += dados_campeonato

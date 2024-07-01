@@ -58,18 +58,11 @@ class TelaCurso:
             [sg.Text('Código:', size=(15, 1), font=("Times New Roman", 12)), sg.InputText('', key='codigo')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Selecionar Curso', layout, resizable=True)
-        
-        while True:
-            event, values = self.__window.read()
-            if event == sg.WINDOW_CLOSED or event == 'Cancelar':
-                codigo = None  # Define como None se cancelar
-                break
-            elif event == 'Confirmar':
-                codigo = values['codigo']
-                break
-        
-        self.__window.close()
+        self.__window = sg.Window('Seleciona Curso').Layout(layout)
+
+        button, values = self.open()
+        codigo = values['codigo']
+        self.close()
         return codigo
 
     def mostra_dados_cursos(self, todos_dados_cursos):

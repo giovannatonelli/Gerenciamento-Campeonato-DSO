@@ -23,18 +23,18 @@ class DAO(ABC):
 
     def update(self, key, obj):
         try:
-            if (self.___cache[key] != None):
+            if (self.__cache[key] != None):
                 self.__cache[key] = obj
                 self.__dump()
         except KeyError:
             print(f"Chave {key} não encontrada no cache")
 
     def remove(self, key):
-        try:
+        if key in self.__cache:
             self.__cache.pop(key)
             self.__dump()
-        except KeyError:
-            print(f"Chave {key} não encontrada no cache")
+        else:
+            raise KeyError(f"Chave {key} não encontrada no cache")
 
     def get(self, key):
         try:
