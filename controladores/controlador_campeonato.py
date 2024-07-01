@@ -11,6 +11,7 @@ from exceptions.campeonato_exceptions import EquipesInsuficientesException
 from exceptions.equipes_exceptions import EquipeNaoExisteException
 from exceptions.lista_vazia_exception import ListaVaziaException
 from DAOS.campeonato_dao import CampeonatoDAO
+from DAOS.equipecampeonato_dao import EquipeCampeonatoDAO
 
 class ControladorCampeonato:
     def __init__(self, controlador_sistema):
@@ -36,7 +37,6 @@ class ControladorCampeonato:
                 if campeonato.nome_campeonato == nome:
                     self.__campeonato = campeonato
                     self.abre_tela_campeonato_selecionado()
-                else:
                     raise CampeonatoNaoExisteException()
         except CampeonatoNaoExisteException as e:
             self.__tela_campeonato.mostrar_mensagem(e)
@@ -62,12 +62,29 @@ class ControladorCampeonato:
                 self.__tela_campeonato_selecionado.mostrar_mensagem(e)
 
 
+    # def gera_resultado_partida(self):
+    #     for partida in self.__campeonato.partidas:
+    #         partida.num_gols_eq1 = random.randint(0, 10)
+    #         partida.num_gols_eq2 = random.randint(0, 10)
+    #         self.__tela_campeonato_selecionado.mostra_resultado_partida(partida)
+    #         self.gera_pontuacao_partida(partida)   
+
     def gera_resultado_partida(self):
+        todos_resultados_partidas = ""
         for partida in self.__campeonato.partidas:
             partida.num_gols_eq1 = random.randint(0, 10)
             partida.num_gols_eq2 = random.randint(0, 10)
-            self.__tela_campeonato_selecionado.mostra_resultado_partida(partida)
-            self.gera_pontuacao_partida(partida)   
+            
+            resultado_partida = (
+                f"Partida entre {partida.equipe_1.nome} e {partida.equipe_2.nome}:\n"
+                f"Gols {partida.equipe_1.nome}: {partida.num_gols_eq1}\n"
+                f"Gols {partida.equipe_2.nome}: {partida.num_gols_eq2}\n\n"
+            )
+            todos_resultados_partidas += resultado_partida
+            self.gera_pontuacao_partida(partida)
+    
+        self.__tela_campeonato_selecionado.mostra_resultado_partida(todos_resultados_partidas)
+
             
     def gera_pontuacao_partida(self, partida):
         gols_eq1 = partida.num_gols_eq1
@@ -120,13 +137,14 @@ class ControladorCampeonato:
         equipe = self.__controlador_sistema.busca_equipe(self.__tela_campeonato_selecionado.escolhe_equipe())
         try:
             if isinstance(equipe, Equipe):
+                #self.__equipecampeonato_DAO.add(equipe)
                 self.__campeonato.adc_equipe(equipe)
             else:
                 raise EquipeNaoExisteException()
         except EquipeNaoExisteException as e:
                 self.__tela_campeonato_selecionado.mostrar_mensagem(e)
                 self.__abre_tela_campeonato_selecionado()
-        
+
     def listar_campeonatos(self):
         try:
             if not self.__campeonato_DAO:

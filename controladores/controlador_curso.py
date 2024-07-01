@@ -68,12 +68,12 @@ class ControladorCurso:
         try:
             if not self.__curso_DAO:
                 raise ListaVaziaException()
-            
             todos_dados_cursos = ""
             for curso in self.__curso_DAO.get_all():
                 dados_curso = f"Código: {curso.codigo_curso}\nNome: {curso.nome_curso}\n\n"
                 todos_dados_cursos += dados_curso
-                self.__tela_curso.mostra_dados_cursos(todos_dados_cursos)
+            
+            self.__tela_curso.mostra_dados_cursos(todos_dados_cursos)
     
         except ListaVaziaException as e:
             self.__tela_curso.mostrar_mensagem(e)

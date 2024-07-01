@@ -5,7 +5,7 @@ class CursoJaCadastradoException(Exception):
 
 class CursoNExisteException(Exception):
     def __init__(self):
-        self.mensagem = "Por favor, cadastre um curso antes de adicionar um aluno"
+        self.mensagem = "Por favor, cadastre o curso antes de adicionar um aluno"
         super().__init__(self.mensagem)
 
 class CursoNCadastradoException(Exception):

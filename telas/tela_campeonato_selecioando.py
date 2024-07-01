@@ -37,7 +37,7 @@ class TelaCampeonatoSelecionado:
             [sg.InputText('', key='equipe')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Escolher Equipe').Layout(layout)
+        self.__window = sg.Window('Escolher Equipe', layout)
 
         button, values = self.open()
         equipe = values['equipe']
@@ -45,21 +45,58 @@ class TelaCampeonatoSelecionado:
         return equipe
 
     def mostra_equipes(self, campeonato):
-        sg.popup_scrolled('\n'.join([f'  - {equipe}' for equipe in campeonato.equipes]), title='Equipes', font=("Times New Roman", 14))
+        layout = [
+            [sg.Text(f'Equipes do Campeonato {campeonato.nome_campeonato}', font=("Times New Roman", 16))],
+            [sg.Multiline('\n'.join([f'  - {equipe}' for equipe in campeonato.equipes]), size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Equipes", layout, resizable=True)
+        self.__window.read()
+        self.__window.close()
 
     def mostra_numero_de_equipes(self, campeonato):
         sg.popup(f'Número de equipes: {len(campeonato.equipes)}', font=("Times New Roman", 16))
 
     def mostra_partidas(self, campeonato):
         partidas = '\n'.join([f"  - {partida.equipe_1.nome}     x   {partida.equipe_2.nome}     - {partida.data_partida} - {partida.arbitro.nome}" for partida in campeonato.partidas])
-        sg.popup_scrolled(partidas, title='Partidas', font=("Times New Roman", 14))
+        layout = [
+            [sg.Text(f'Partidas do Campeonato {campeonato.nome_campeonato}', font=("Times New Roman", 16))],
+            [sg.Multiline(partidas, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Partidas", layout, resizable=True)
+        self.__window.read()
+        self.__window.close()
 
-    def mostra_resultado_partida(self, partida):
-        sg.popup(f"  - {partida.equipe_1.nome} {partida.num_gols_eq1}    x   {partida.num_gols_eq2} {partida.equipe_2.nome}  - {partida.data_partida}", font=("Times New Roman", 14))
+    # def mostra_resultado_partida(self, partida):
+    #     sg.popup(f"  - {partida.equipe_1.nome} {partida.num_gols_eq1}    x   {partida.num_gols_eq2} {partida.equipe_2.nome}  - {partida.data_partida}", font=("Times New Roman", 14))
+
+    # def mostra_resultado_partida(self, partida):
+    #     resultados = '\n'.join([f"  - {partida.equipe_1.nome} {partida.num_gols_eq1}    x   {partida.num_gols_eq2} {partida.equipe_2.nome}  - {partida.data_partida}"])
+    #     layout = [
+    #         [sg.Text(f'Resultados das Partidas do Campeonato', font=("Times New Roman", 16))],
+    #         [sg.Multiline(resultados, size=(50, 20), disabled=True)]
+    #     ]
+    #     self.__window = sg.Window("Resultados das Partidas", layout, resizable=True)
+    #     self.__window.read()
+    #     self.__window.close()
+
+    def mostra_resultado_partida(self, todos_resultados_partidas):
+        layout = [
+            [sg.Text('-------- RESULTADOS DAS PARTIDAS ----------', font=("Times New Roman", 16))], 
+            [sg.Multiline(todos_resultados_partidas, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Resultados das Partidas", layout, resizable=True)
+        button, values = self.__window.read()
+        self.__window.close()
 
     def mostrar_podio(self, podio: dict):
         podio_str = '\n'.join([f"Time: {chave.nome}, Pontos: {valor[0]}, Saldo de Gols: {valor[1]}" for chave, valor in podio])
-        sg.popup_scrolled(podio_str, title='Pódio', font=("Times New Roman", 14))
+        layout = [
+            [sg.Text('Pódio', font=("Times New Roman", 16))],
+            [sg.Multiline(podio_str, size=(50, 20), disabled=True)]
+        ]
+        self.__window = sg.Window("Pódio", layout, resizable=True)
+        self.__window.read()
+        self.__window.close()
 
     def mostrar_mensagem(self, msg: str):
         sg.popup(msg, font=("Times New Roman", 14))
@@ -79,11 +116,11 @@ class TelaCampeonatoSelecionado:
             [sg.Radio('Voltar para CAMPEONATOS', "RD1", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Opções do Campeonato').Layout(layout)
+        self.__window = sg.Window('Opções do Campeonato', layout)
 
     def close(self):
-        self.__window.Close()
+        self.__window.close()
 
     def open(self):
-        button, values = self.__window.Read()
+        button, values = self.__window.read()
         return button, values

@@ -69,7 +69,6 @@ class TelaCurso:
         layout = [
             [sg.Text('-------- DADOS DOS CURSOS ----------')], 
             [sg.Multiline(todos_dados_cursos, size=(50, 20), disabled=True)]
-            
         ]
         self.__window = sg.Window("Dados dos Cursos", layout, resizable=True)
         button, values = self.__window.read()
